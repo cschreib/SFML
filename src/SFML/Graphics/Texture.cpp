@@ -767,10 +767,16 @@ void Texture::bind(const Texture* texture, sf::CoordinateType coordinateType)
             // Load the matrix
             glCheck(glMatrixMode(GL_TEXTURE));
             glCheck(glLoadMatrixf(matrix));
-
-            // Go back to model-view mode (sf::RenderTarget relies on it)
-            glCheck(glMatrixMode(GL_MODELVIEW));
         }
+        else
+        {
+            // Reset the texture matrix
+            glCheck(glMatrixMode(GL_TEXTURE));
+            glCheck(glLoadIdentity());
+        }
+
+        // Go back to model-view mode (sf::RenderTarget relies on it)
+        glCheck(glMatrixMode(GL_MODELVIEW));
     }
     else
     {
